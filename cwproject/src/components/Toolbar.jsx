@@ -1,42 +1,48 @@
 // components/Toolbar.jsx
-import React from 'react';
-import { useDrag } from 'react-dnd';
-import { VStack, Box, Heading } from '@chakra-ui/react';
+import React, { useContext } from 'react';
+import { VStack, Button, Heading } from '@chakra-ui/react';
+import { WebsiteContext } from '../contexts/WebsiteContext';
 import { contentBlocks } from '../Data/contentBlocks';
 
-const DraggableItem = ({ id, type, name, content }) => {
-  const [{ isDragging }, drag] = useDrag(() => ({
-    type: 'CONTENT_BLOCK',
-    item: { id, type, content },
-    collect: (monitor) => ({
-      isDragging: !!monitor.isDragging(),
-    }),
-  }));
-
-  return (
-    <Box
-      ref={drag}
-      p={2}
-      my={1}
-      bg="white"
-      color="purple.700"
-      borderRadius="md"
-      boxShadow="sm"
-      cursor="move"
-      opacity={isDragging ? 0.5 : 1}
-    >
-      {name}
-    </Box>
-  );
-};
-
 const Toolbar = () => {
+  const { addElement } = useContext(WebsiteContext);
+
+  const handleAddElement = (block) => {
+    addElement(block);
+  };
+
+  const handleAddImage = () => {
+    addElement({
+      id: Date.now().toString(),
+      type: 'image',
+      content: 'https://via.placeholder.com/300x200',
+    });
+  };
+
   return (
     <VStack align="stretch" spacing={2}>
-      <Heading size="md" color="white">Content Blocks</Heading>
+      <Heading size="md" color="black">Content Blocks</Heading>
       {contentBlocks.map((block) => (
-        <DraggableItem key={block.id} {...block} />
+        <Button
+          key={block.id}
+          onClick={() => handleAddElement(block)}
+          bg="blue"
+          color="white"
+          border='none'
+          variant="outline"
+        >
+          {block.name}
+        </Button>
       ))}
+      <Button
+        onClick={handleAddImage}
+        bg="green"
+        color="white"
+        border='none'
+        variant="outline"
+      >
+        Add Image
+      </Button>
     </VStack>
   );
 };

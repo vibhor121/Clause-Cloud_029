@@ -1,8 +1,9 @@
-import React, { useState, useContext, useEffect } from 'react';
+// App.jsx
+import React, { useState } from 'react';
 import { Box, Flex, Button, VStack } from '@chakra-ui/react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import { WebsiteProvider, WebsiteContext } from './contexts/WebsiteContext';
+import { WebsiteProvider } from './contexts/WebsiteContext';
 import Toolbar from './components/Toolbar';
 import DragDropArea from './components/DragDropArea';
 import Preview from './components/Preview';
@@ -17,7 +18,7 @@ function App() {
     <DndProvider backend={HTML5Backend}>
       <WebsiteProvider>
         <Flex height="100vh">
-          <Box width="300px" bg="purple.600" p={5} overflowY="auto">
+          <Box width="300px" bg="white" p={5} overflowY="auto">
             <VStack spacing={4} align="stretch">
               <TemplateLibrary />
               <Toolbar />

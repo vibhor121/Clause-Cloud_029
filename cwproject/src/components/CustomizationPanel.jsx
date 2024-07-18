@@ -1,6 +1,6 @@
 // components/CustomizationPanel.jsx
 import React, { useContext } from 'react';
-import { VStack, HStack, Text, Input, Select, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper } from '@chakra-ui/react';
+import { VStack, HStack, Text, Input, Select, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, Divider } from '@chakra-ui/react';
 import { WebsiteContext } from '../contexts/WebsiteContext';
 
 const CustomizationPanel = () => {
@@ -29,24 +29,26 @@ const CustomizationPanel = () => {
   return (
     <VStack align="stretch" spacing={4}>
       <Text fontWeight="bold">Customize</Text>
-      <HStack>
-        <Text>Text Color:</Text>
+      <HStack display={'flex'} flexDir={'column'} >
+        <Text>Text Color</Text>
         <Input 
           type="color" 
           value={customizations.color || '#000000'} 
           onChange={handleColorChange} 
         />
       </HStack>
-      <HStack>
-        <Text>Background Color:</Text>
+      <Divider  />
+      <HStack display={'flex'} flexDir={'column'}>
+        <Text>Background Color</Text>
         <Input 
           type="color" 
           value={customizations.backgroundColor || '#ffffff'} 
           onChange={handleBackgroundColorChange} 
         />
       </HStack>
-      <HStack>
-        <Text>Background Image URL:</Text>
+      <Divider />
+      <HStack display={'flex'} flexDir={'column'}>
+        <Text>Background Image URL</Text>
         <Input 
           type="text" 
           value={customizations.backgroundImage || ''} 
@@ -54,8 +56,8 @@ const CustomizationPanel = () => {
           placeholder="Enter image URL"
         />
       </HStack>
-      <HStack>
-        <Text>Font:</Text>
+      <HStack display={'flex'} flexDir={'column'}>
+        <Text>Font</Text>
         <Select onChange={handleFontChange} value={customizations.fontFamily}>
           <option value="Arial">Arial</option>
           <option value="Helvetica">Helvetica</option>
@@ -65,11 +67,12 @@ const CustomizationPanel = () => {
           <option value="Playfair Display">Playfair Display</option>
         </Select>
       </HStack>
-      <HStack>
-        <Text>Border Radius:</Text>
+      <HStack display={'flex'} flexDir={'column'}>
+        <Text>Border Radius</Text>
         <NumberInput 
           min={0} 
           max={50} 
+          w={'100%'}
           value={customizations.borderRadius || 0} 
           onChange={handleBorderRadiusChange}
         >

@@ -7,7 +7,7 @@ export const WebsiteProvider = ({ children }) => {
   const [customizations, setCustomizations] = useState({});
 
   const addElement = useCallback((element) => {
-    setElements((prevElements) => [...prevElements, element]);
+    setElements((prevElements) => [...prevElements, { ...element, id: Date.now().toString() }]);
   }, []);
 
   const updateElement = useCallback((id, updates) => {
@@ -28,7 +28,14 @@ export const WebsiteProvider = ({ children }) => {
     setElements(template.elements);
     setCustomizations(template.customizations || {});
   }, []);
-
+  const moveElement = useCallback((dragIndex, hoverIndex) => {
+    setElements((prevElements) => {
+      const newElements = [...prevElements];
+      const [removed] = newElements.splice(dragIndex, 1);
+      newElements.splice(hoverIndex, 0, removed);
+      return newElements;
+    });
+  }, []);
   return (
     <WebsiteContext.Provider
       value={{
@@ -36,9 +43,11 @@ export const WebsiteProvider = ({ children }) => {
         addElement,
         updateElement,
         removeElement,
+        moveElement,
         customizations,
         updateCustomization,
         applyTemplate,
+
       }}
     >
       {children}
