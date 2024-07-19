@@ -1,4 +1,3 @@
-// components/CustomizationPanel.jsx
 import React, { useContext } from 'react';
 import { VStack, HStack, Text, Input, Select, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, Divider } from '@chakra-ui/react';
 import { WebsiteContext } from '../contexts/WebsiteContext';
@@ -15,7 +14,20 @@ const CustomizationPanel = () => {
   };
 
   const handleBackgroundImageChange = (e) => {
-    updateCustomization('backgroundImage', e.target.value);
+    const imageUrl = e.target.value;
+    if (imageUrl) {
+      updateCustomization('backgroundImage', `url(${imageUrl})`);
+      updateCustomization('backgroundSize', 'cover');
+      updateCustomization('backgroundRepeat', 'no-repeat');
+      updateCustomization('backgroundPosition', 'center center');
+      updateCustomization('backgroundAttachment', 'fixed');
+    } else {
+      updateCustomization('backgroundImage', 'none');
+      updateCustomization('backgroundSize', 'auto');
+      updateCustomization('backgroundRepeat', 'repeat');
+      updateCustomization('backgroundPosition', 'initial');
+      updateCustomization('backgroundAttachment', 'scroll');
+    }
   };
 
   const handleFontChange = (e) => {
@@ -51,7 +63,7 @@ const CustomizationPanel = () => {
         <Text>Background Image URL</Text>
         <Input 
           type="text" 
-          value={customizations.backgroundImage || ''} 
+          value={customizations.backgroundImage ? customizations.backgroundImage.slice(4, -1) : ''} 
           onChange={handleBackgroundImageChange} 
           placeholder="Enter image URL"
         />

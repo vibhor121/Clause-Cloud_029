@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { Box, Button, VStack, Image, Input, Text } from '@chakra-ui/react';
 import { WebsiteContext } from '../contexts/WebsiteContext';
 import { useDrag, useDrop } from 'react-dnd';
@@ -6,7 +6,7 @@ import { useDrag, useDrop } from 'react-dnd';
 const DraggableElement = ({ element, index }) => {
   const { updateElement, removeElement, moveElement, customizations } = useContext(WebsiteContext);
   const ref = useRef(null);
-  const fileInputRef = useRef(null);
+  const [imageUrl, setImageUrl] = useState(element.content);
 
   const [{ handlerId }, drop] = useDrop({
     accept: 'element',
@@ -45,15 +45,12 @@ const DraggableElement = ({ element, index }) => {
     updateElement(element.id, { content: e.target.innerHTML });
   };
 
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        updateElement(element.id, { content: e.target.result });
-      };
-      reader.readAsDataURL(file);
-    }
+  const handleImageUrlChange = (e) => {
+    setImageUrl(e.target.value);
+  };
+
+  const handleImageUrlSubmit = () => {
+    updateElement(element.id, { content: imageUrl });
   };
 
   const renderContent = () => {
@@ -63,17 +60,16 @@ const DraggableElement = ({ element, index }) => {
           <>
             <Image 
               src={element.content} 
-              alt="User uploaded image" 
+              alt="User provided image" 
               borderRadius={customizations.borderRadius}
             />
             <Input
-              type="file"
-              accept="image/*"
-              onChange={handleImageUpload}
-              display="none"
-              ref={fileInputRef}
+              type="text"
+              value={imageUrl}
+              onChange={handleImageUrlChange}
+              placeholder="Enter image URL"
             />
-            <Button onClick={() => fileInputRef.current.click()}>
+            <Button onClick={handleImageUrlSubmit}>
               Change Image
             </Button>
           </>
