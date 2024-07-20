@@ -1,47 +1,41 @@
-// App.jsx
-import React, { useState } from 'react';
-import { Box, Flex, Button, VStack } from '@chakra-ui/react';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
-import { WebsiteProvider } from './contexts/WebsiteContext';
-import Toolbar from './components/Toolbar';
-import DragDropArea from './components/DragDropArea';
-import Preview from './components/Preview';
-import CustomizationPanel from './components/CustomizationPanel';
-import PublishButton from './components/PublishButton';
-import TemplateLibrary from './components/TemplateLibrary';
+import React from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import Callback from './components/Callback';
+import Login from './components/Login';
+import WebsiteBuilder from './components/WebsiteBuilder';
+import './App.css';
 
-function App() {
-  const [showPreview, setShowPreview] = useState(false);
+const App = () => {
+  const { isAuthenticated, isLoading } = useAuth0();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   return (
-    <DndProvider backend={HTML5Backend}>
-      <WebsiteProvider>
-        <Flex height="100vh">
-          <Box width="300px" bg="white" p={5} overflowY="auto">
-            <VStack spacing={4} align="stretch">
-              <TemplateLibrary />
-              <Toolbar />
-              <CustomizationPanel />
-            </VStack>
-          </Box>
-          <Flex flex={1} flexDirection="column">
-            <Flex justifyContent="space-between" p={3} bg="gray.200">
-              <Button onClick={() => setShowPreview(!showPreview)}>
-                {showPreview ? 'Edit Mode' : 'Preview Mode'}
-              </Button>
-              <PublishButton />
-            </Flex>
-            {showPreview ? (
-              <Preview />
-            ) : (
-              <DragDropArea />
-            )}
-          </Flex>
-        </Flex>
-      </WebsiteProvider>
-    </DndProvider>
+    <div className={isAuthenticated ? 'authenticated' : 'unauthenticated'}>
+      <Routes>
+        <Route path="/callback" element={<Callback />} />
+        <Route 
+          path="/" 
+          element={
+            isAuthenticated ? 
+              <Navigate to="/builder" replace /> : 
+              <Login />
+          } 
+        />
+        <Route 
+          path="/builder" 
+          element={
+            isAuthenticated ? 
+              <WebsiteBuilder /> : 
+              <Navigate to="/" replace />
+          } 
+        />
+      </Routes>
+    </div>
   );
-}
+};
 
 export default App;

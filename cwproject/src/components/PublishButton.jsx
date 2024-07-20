@@ -39,7 +39,9 @@ const PublishButton = () => {
   }
 
   return (
-    <Button onClick={handlePublish}>Publish</Button>
+    <Button onClick={handlePublish}>
+    Publish
+  </Button>
   )
 }
 
