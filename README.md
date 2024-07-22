@@ -21,6 +21,9 @@ Technologies used in the project.
 2. Change the directory within "Clause-Cloud_029" using the following bash command.
 
 ```bash
-git clone https://github.com/vibhor121/Clause-Cloud_029.git).git
+git clone https://github.com/vibhor121/Clause-Cloud_029.git
 cd ./Clause-Cloud_029
+npm install
+npm run dev
 ```
+#
