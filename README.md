@@ -18,9 +18,9 @@ Technologies used in the project.
 
 ## Directory Structure
 1. Clone the repository using the bash command mentioned below.
-2. Change the directory within "Salesforce-Sages_084" using the following bash command.
+2. Change the directory within "Clause-Cloud_029" using the following bash command.
 
 ```bash
-git clone https://github.com/vibhor121[/Clause-Cloud_029](https://github.com/vibhor121/Clause-Cloud_029.git).git/
+git clone https://github.com/vibhor121/Clause-Cloud_029.git).git
 cd ./Clause-Cloud_029
 ```
