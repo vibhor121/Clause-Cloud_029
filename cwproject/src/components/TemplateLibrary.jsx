@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { VStack, Button, Heading } from '@chakra-ui/react';
 import { WebsiteContext } from '../contexts/WebsiteContext';
 import { templates } from '../Data/template';
@@ -17,10 +17,9 @@ const TemplateLibrary = () => {
         <Button
           key={template.id}
           onClick={() => handleTemplateSelect(template)}
-          bg="blue"
-          color="white"
-          border='none'
-          variant="outline"
+          colorScheme="purple"
+          size="sm"
+          variant="solid"
         >
           {template.name}
         </Button>

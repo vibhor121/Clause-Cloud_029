@@ -1,4 +1,5 @@
-import React, { createContext, useState, useCallback } from 'react';
+import { createContext, useState, useCallback } from 'react';
+import PropTypes from 'prop-types';
 
 export const WebsiteContext = createContext();
 
@@ -53,4 +54,8 @@ export const WebsiteProvider = ({ children }) => {
       {children}
     </WebsiteContext.Provider>
   );
+};
+
+WebsiteProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };

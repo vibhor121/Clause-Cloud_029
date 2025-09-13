@@ -16,7 +16,7 @@ export const templates = [
         {
           id: 'image1',
           type: 'image',
-          content: '<img src="https://via.placeholder.com/600x400" alt="Placeholder" />',
+          content: 'https://picsum.photos/600/400',
         },
       ],
       customizations: {
@@ -73,17 +73,17 @@ export const templates = [
         {
           id: 'image1',
           type: 'image',
-          content: '<img src="https://via.placeholder.com/300x300" alt="Project 1" />',
+          content: 'https://picsum.photos/300/300?random=1',
         },
         {
           id: 'image2',
           type: 'image',
-          content: '<img src="https://via.placeholder.com/300x300" alt="Project 2" />',
+          content: 'https://picsum.photos/300/300?random=2',
         },
         {
           id: 'image3',
           type: 'image',
-          content: '<img src="https://via.placeholder.com/300x300" alt="Project 3" />',
+          content: 'https://picsum.photos/300/300?random=3',
         },
       ],
       customizations: {

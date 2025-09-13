@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import styled from 'styled-components';
 import { WebsiteContext } from '../contexts/WebsiteContext';
 import html2canvas from 'html2canvas';

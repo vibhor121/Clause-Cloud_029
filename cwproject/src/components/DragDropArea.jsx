@@ -1,6 +1,6 @@
 // components/DragDropArea.jsx
-import React, { useContext } from 'react';
-import { Box, VStack } from '@chakra-ui/react';
+import { useContext } from 'react';
+import { Box, VStack, Text, Center } from '@chakra-ui/react';
 import { WebsiteContext } from '../contexts/WebsiteContext';
 import DraggableElement from './DraggableElement';
 
@@ -16,11 +16,24 @@ const DragDropArea = () => {
       overflowY="auto"
       {...customizations}
     >
-      <VStack spacing={4} align="stretch">
-        {elements.map((element, index) => (
-          <DraggableElement key={element.id} element={element} index={index} />
-        ))}
-      </VStack>
+      {elements.length === 0 ? (
+        <Center h="100%" minH="400px">
+          <VStack spacing={4}>
+            <Text fontSize="xl" color="gray.500" textAlign="center">
+              🎨 Your website is empty
+            </Text>
+            <Text color="gray.400" textAlign="center">
+              Add content blocks from the toolbar on the left to get started
+            </Text>
+          </VStack>
+        </Center>
+      ) : (
+        <VStack spacing={4} align="stretch">
+          {elements.map((element, index) => (
+            <DraggableElement key={element.id} element={element} index={index} />
+          ))}
+        </VStack>
+      )}
     </Box>
   );
 };

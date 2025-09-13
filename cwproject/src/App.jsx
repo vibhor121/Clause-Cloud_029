@@ -1,4 +1,3 @@
-import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Callback from './components/Callback';

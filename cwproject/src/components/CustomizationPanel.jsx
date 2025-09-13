@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { VStack, HStack, Text, Input, Select, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, Divider } from '@chakra-ui/react';
+import { useContext } from 'react';
+import { VStack, Text, Input, Select, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, Divider } from '@chakra-ui/react';
 import { WebsiteContext } from '../contexts/WebsiteContext';
 
 const CustomizationPanel = () => {
@@ -41,36 +41,43 @@ const CustomizationPanel = () => {
   return (
     <VStack align="stretch" spacing={4}>
       <Text fontWeight="bold">Customize</Text>
-      <HStack display={'flex'} flexDir={'column'} >
-        <Text>Text Color</Text>
+      <VStack align="stretch" spacing={2}>
+        <Text fontSize="sm" fontWeight="medium">Text Color</Text>
         <Input 
           type="color" 
           value={customizations.color || '#000000'} 
-          onChange={handleColorChange} 
+          onChange={handleColorChange}
+          size="sm"
         />
-      </HStack>
-      <Divider  />
-      <HStack display={'flex'} flexDir={'column'}>
-        <Text>Background Color</Text>
+      </VStack>
+      <Divider />
+      <VStack align="stretch" spacing={2}>
+        <Text fontSize="sm" fontWeight="medium">Background Color</Text>
         <Input 
           type="color" 
           value={customizations.backgroundColor || '#ffffff'} 
-          onChange={handleBackgroundColorChange} 
+          onChange={handleBackgroundColorChange}
+          size="sm"
         />
-      </HStack>
+      </VStack>
       <Divider />
-      <HStack display={'flex'} flexDir={'column'}>
-        <Text>Background Image URL</Text>
+      <VStack align="stretch" spacing={2}>
+        <Text fontSize="sm" fontWeight="medium">Background Image URL</Text>
         <Input 
           type="text" 
           value={customizations.backgroundImage ? customizations.backgroundImage.slice(4, -1) : ''} 
           onChange={handleBackgroundImageChange} 
           placeholder="Enter image URL"
+          size="sm"
         />
-      </HStack>
-      <HStack display={'flex'} flexDir={'column'}>
-        <Text>Font</Text>
-        <Select onChange={handleFontChange} value={customizations.fontFamily}>
+      </VStack>
+      <VStack align="stretch" spacing={2}>
+        <Text fontSize="sm" fontWeight="medium">Font Family</Text>
+        <Select 
+          onChange={handleFontChange} 
+          value={customizations.fontFamily || 'Arial'}
+          size="sm"
+        >
           <option value="Arial">Arial</option>
           <option value="Helvetica">Helvetica</option>
           <option value="Times New Roman">Times New Roman</option>
@@ -78,15 +85,16 @@ const CustomizationPanel = () => {
           <option value="Montserrat">Montserrat</option>
           <option value="Playfair Display">Playfair Display</option>
         </Select>
-      </HStack>
-      <HStack display={'flex'} flexDir={'column'}>
-        <Text>Border Radius</Text>
+      </VStack>
+      <VStack align="stretch" spacing={2}>
+        <Text fontSize="sm" fontWeight="medium">Border Radius</Text>
         <NumberInput 
           min={0} 
           max={50} 
           w={'100%'}
           value={customizations.borderRadius || 0} 
           onChange={handleBorderRadiusChange}
+          size="sm"
         >
           <NumberInputField />
           <NumberInputStepper>
@@ -94,7 +102,7 @@ const CustomizationPanel = () => {
             <NumberDecrementStepper />
           </NumberInputStepper>
         </NumberInput>
-      </HStack>
+      </VStack>
     </VStack>
   );
 };

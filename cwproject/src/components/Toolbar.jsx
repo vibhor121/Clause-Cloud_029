@@ -1,5 +1,5 @@
 // components/Toolbar.jsx
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { VStack, Button, Heading } from '@chakra-ui/react';
 import { WebsiteContext } from '../contexts/WebsiteContext';
 import { contentBlocks } from '../Data/contentBlocks';
@@ -15,7 +15,7 @@ const Toolbar = () => {
     addElement({
       id: Date.now().toString(),
       type: 'image',
-      content: 'https://via.placeholder.com/300x200',
+      content: 'https://picsum.photos/300/200',
     });
   };
 
@@ -26,20 +26,18 @@ const Toolbar = () => {
         <Button
           key={block.id}
           onClick={() => handleAddElement(block)}
-          bg="blue"
-          color="white"
-          border='none'
-          variant="outline"
+          colorScheme="blue"
+          size="sm"
+          variant="solid"
         >
           {block.name}
         </Button>
       ))}
       <Button
         onClick={handleAddImage}
-        bg="green"
-        color="white"
-        border='none'
-        variant="outline"
+        colorScheme="green"
+        size="sm"
+        variant="solid"
       >
         Add Image
       </Button>

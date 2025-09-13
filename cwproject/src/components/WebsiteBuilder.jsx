@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Box, Flex, Button, VStack, Spacer } from '@chakra-ui/react';
 import { useAuth0 } from '@auth0/auth0-react';
 import Toolbar from './Toolbar';

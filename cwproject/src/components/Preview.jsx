@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import styled from 'styled-components'
 import { WebsiteContext } from '../contexts/WebsiteContext'
 import { Box, Image, Text } from '@chakra-ui/react'
@@ -22,10 +22,37 @@ const PreviewContainer = styled.div`
 const Preview = () => {
   const { elements, customizations } = useContext(WebsiteContext)
 
+  const getImageUrl = (content) => {
+    // If content is HTML, extract the src attribute
+    if (content.includes('<img')) {
+      const match = content.match(/src="([^"]*)"/);
+      return match ? match[1] : content;
+    }
+    // If content is already a URL, return it
+    return content;
+  };
+
   const renderElement = (element) => {
     switch (element.type) {
-      case 'image':
-        return <Image src={element.content} alt="Preview image" borderRadius={customizations.borderRadius} />
+      case 'image': {
+        const imageSrc = getImageUrl(element.content);
+        return (
+          <Image 
+            src={imageSrc} 
+            alt="Preview image" 
+            borderRadius={customizations.borderRadius}
+            maxW="100%"
+            h="auto"
+            loading="lazy"
+            onError={(e) => {
+              e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkltYWdlIE5vdCBGb3VuZDwvdGV4dD48L3N2Zz4=';
+            }}
+            onLoad={() => {
+              // Image loaded successfully
+            }}
+          />
+        );
+      }
       case 'header':
         return <Text as="h2" fontSize="2xl" fontWeight="bold" dangerouslySetInnerHTML={{ __html: element.content }} />
       case 'paragraph':

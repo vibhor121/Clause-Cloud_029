@@ -15,7 +15,7 @@ export const contentBlocks = [
       id: 'image',
       name: 'Image',
       type: 'image',
-      content: '<img src="https://via.placeholder.com/300x200" alt="Placeholder" />',
+      content: 'https://picsum.photos/300/200',
     },
     {
       id: 'button',
@@ -42,9 +42,9 @@ export const contentBlocks = [
       content: '<hr />',
     },
     {
-      id: 'image',
-      name: 'Image',
+      id: 'image-url',
+      name: 'Image URL',
       type: 'image',
-      content: 'https://via.placeholder.com/300x200',
+      content: 'https://picsum.photos/300/200',
     }
   ];
