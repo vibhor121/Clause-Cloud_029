@@ -15,5 +15,7 @@ const Callback = () => {
 
   return <Navigate to="/builder" replace />;
 };
+    
 
 export default Callback;
+        
